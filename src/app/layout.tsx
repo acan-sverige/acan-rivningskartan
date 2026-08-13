@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import "./globals.css";
 import { sanityFetch } from "@/lib/sanityFetch";
 import { settingsQuery } from "../../sanity/lib/queries";
+import { Analytics } from '@vercel/analytics/next';
+import "./globals.css";
+
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SettingsType>({
@@ -30,6 +32,7 @@ export default function RootLayout({
       <body>
         {children}
         <div id="portal"></div>
+        <Analytics />
       </body>
     </html>
   );

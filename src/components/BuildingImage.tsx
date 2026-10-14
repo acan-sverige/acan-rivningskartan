@@ -6,23 +6,24 @@ import { Image } from "./Image";
 export const BuildingImage: FC<
   Pick<FeatureBuilding, "images" | "state"> &
     Pick<ComponentProps<typeof Image>, "sizes">
-> = ({ images, state, sizes }) => (
-  <div className="w-full ">
-    {images && images.length > 0 ? (
+  > = ({ images, state, sizes }) => {
+    const firstValidImage = images?.find(img => img?.asset?.metadata?.dimensions?.width > 0);
+
+    return <div className="w-full">{firstValidImage ? (
       <Image
-        image={images[0]}
+        image={firstValidImage}
         className={classNames(
           "aspect-square h-auto w-full object-contain object-bottom",
           state === "riven" && "grayscale",
         )}
         loading="lazy"
         alt=""
-        width={images[0].asset.metadata.dimensions.width}
-        height={images[0].asset.metadata.dimensions.height}
+        width={firstValidImage.asset.metadata.dimensions.width}
+        height={firstValidImage.asset.metadata.dimensions.height}
         sizes={sizes}
       />
     ) : (
       <div className="aspect-square bg-acan-blue" />
     )}
   </div>
-);
+}

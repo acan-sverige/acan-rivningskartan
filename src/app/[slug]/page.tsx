@@ -14,7 +14,8 @@ export function generateStaticParams() {
   return [{ slug: dict.slugs.list }, { slug: dict.slugs.map }];
 }
 
-export default function SlugPage({ params }: { params: { slug: string } }) {
+export default async function SlugPage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   switch (params.slug) {
     case dict.slugs.list:
       return <ListPage />;

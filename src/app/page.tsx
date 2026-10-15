@@ -12,7 +12,7 @@ export default async function ManifestPage() {
     query: manifestQuery,
     tags: ["manifest"],
   });
-  const isDraftMode = draftMode().isEnabled;
+  const isDraftMode = (await draftMode()).isEnabled;
   const dict = await getDictionary();
 
   if (isDraftMode && readToken) {

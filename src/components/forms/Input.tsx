@@ -21,18 +21,16 @@ export const Input: FC<
   const [interacted, setInteracted] = useState(false);
 
   const handleInteracted = useCallback(() => setInteracted(true), []);
-  const handleFocus = props.min
-    ? useCallback(
-        (e: FocusEvent<HTMLInputElement>) => {
-          // if there's a min value and the input is empty, set it to the min value
-          if (props.min && !props.value && !e.target.value) {
-            props.onChange?.({ target: { value: props.min } });
-            e.target.value = props.min.toString();
-          }
-        },
-        [props.min, props.value, props.onChange],
-      )
-    : undefined;
+  const handleFocus = useCallback(
+    (e: FocusEvent<HTMLInputElement>) => {
+      // if there's a min value and the input is empty, set it to the min value
+      if (props.min && !props.value && !e.target.value) {
+        props.onChange?.({ target: { value: props.min } });
+        e.target.value = props.min.toString();
+      }
+    },
+    [props.min, props.value, props.onChange],
+  );
 
   return (
     <div className="relative">
@@ -41,7 +39,7 @@ export const Input: FC<
         id={props.name}
         className="peer w-full appearance-none border-b border-current bg-transparent outline-none focus-within:border-acan-blue"
         placeholder=" "
-        onFocus={handleFocus}
+        onFocus={props.min ? handleFocus : undefined}
         onBlur={handleInteracted}
       />
       <label

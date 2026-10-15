@@ -6,7 +6,7 @@ Built using [Next.js](https://nextjs.org/) with [Sanity](https://www.sanity.io/)
 
 ## Development setup
 
-- Install node v18.16.0
+- Install Node.js 24 (`nvm use`)
 - Run `npm ci`
 - Create a `.env.local` file by copying the `.env.example` and filling in all the variables
 - Start the dev server with `npm run dev`

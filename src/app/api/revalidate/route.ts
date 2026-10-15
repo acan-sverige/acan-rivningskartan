@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     if (!isValidSignature) throw new Error("Invalid signature");
     if (!body?._type) throw new Error("Invalid request: missing _type");
     // revalidate tags and/or paths
-    revalidateTag(body._type);
+    revalidateTag(body._type, "max");
     // return ok
     return NextResponse.json({});
   } catch (e) {

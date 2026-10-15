@@ -89,7 +89,7 @@ export const ListPageContent: FC<{
     router.push(pathname, { scroll: false });
   }, [router, pathname]);
 
-  let rows =
+  const rows =
     buildings?.features
       .filter(
         (b) =>
@@ -118,10 +118,12 @@ export const ListPageContent: FC<{
         </header>
         <main className="grid grid-cols-1 grid-rows-[auto_1fr]">
           <Transition
+            as="div"
             show={hasSelectedBuilding}
             className="fixed bottom-0 left-0 right-0 top-0 z-20 grid grid-cols-12 grid-rows-1"
           >
             <Transition.Child
+              as="div"
               className="col-span-12 row-start-1 overflow-scroll scroll-smooth bg-white sm:col-span-6 sm:col-start-1 md:col-span-5 md:col-start-1"
               enter="transition-transform duration-300 ease-out"
               enterFrom="-translate-x-full"
@@ -140,6 +142,7 @@ export const ListPageContent: FC<{
               )}
             </Transition.Child>
             <Transition.Child
+              as="div"
               className="row-start-1 hidden bg-black sm:col-span-6 sm:col-start-7 sm:block md:col-span-7 md:col-start-6"
               enter="transition-transform ease-out duration-300"
               enterFrom="translate-x-full"

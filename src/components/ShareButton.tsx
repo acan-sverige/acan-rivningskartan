@@ -4,7 +4,7 @@ import { FC, PropsWithChildren, useCallback } from "react";
 interface ShareButtonProps {
   state: string | boolean | undefined;
   onSuccess: (type: "share" | "clipboard") => void;
-  onError: (reason: any) => void;
+  onError: (reason: unknown) => void;
   content: DetailsPanel;
 }
 

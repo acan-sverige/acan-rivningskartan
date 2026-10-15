@@ -42,7 +42,7 @@ export const MapInput: FC<MapInputProps> = (props) => {
     typeof props.value.lng === "number";
 
   return (
-    <Stack space={2}>
+    <Stack gap={2}>
       <div style={{ aspectRatio: 3 / 2, backgroundColor: "lightgrey" }}>
         <ReactMapGl
           mapLib={import("maplibre-gl")}

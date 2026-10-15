@@ -1,6 +1,6 @@
 "use client";
 import { suspend } from "suspend-react";
-import { LiveQueryProvider } from "next-sanity/preview";
+import { LiveQueryProvider } from "@sanity/preview-kit";
 
 // suspend-react cache is global, so we use a unique key to avoid collisions
 const UniqueKey = Symbol("../../sanity/lib/client");

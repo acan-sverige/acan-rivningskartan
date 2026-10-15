@@ -2,8 +2,7 @@
 
 import { SanityDocument } from "next-sanity";
 import { FC } from "react";
-import { useParams } from "next/navigation";
-import { useLiveQuery } from "next-sanity/preview";
+import { useLiveQuery } from "@sanity/preview-kit";
 import { ManifestPageContent } from "./ManifestPageContent";
 
 export const PreviewManifestPageContent: FC<{
@@ -11,7 +10,6 @@ export const PreviewManifestPageContent: FC<{
   query: string;
   dict: Dictionary;
 }> = ({ data, query, dict }) => {
-  const params = useParams();
   const [liveData] = useLiveQuery(data, query);
 
   return <ManifestPageContent data={liveData} dict={dict} />;

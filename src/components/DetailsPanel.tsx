@@ -43,7 +43,7 @@ export const DetailsPanel: FC<DetailsProps> = ({
     setShareSuccessState(type);
     setTimeout(setShareSuccessState, 2000, undefined);
   }, []);
-  const handleShareError = useCallback((reason: any) => {
+  const handleShareError = useCallback((reason: unknown) => {
     if (reason instanceof DOMException && reason.name === "AbortError") return;
     setShareSuccessState(false);
     setTimeout(setShareSuccessState, 2000, undefined);

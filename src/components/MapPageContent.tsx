@@ -173,6 +173,7 @@ export const MapPageContent: FC<
         </div>
       </main>
       <Transition
+        as="div"
         show={hasSelectedFeature}
         className="relative z-10 col-span-12 col-start-1 row-span-2 row-start-1 grid overflow-scroll scroll-smooth bg-white sm:col-span-6 sm:col-start-1 md:col-span-5 md:col-start-1"
         enter="transition-transform duration-300 ease-out"
@@ -192,6 +193,7 @@ export const MapPageContent: FC<
         )}
       </Transition>
       <Transition
+        as="div"
         show={showNewBuildingForm}
         className="relative z-10 col-span-12 col-start-1 row-span-2 row-start-1 grid overflow-scroll scroll-smooth bg-white p-5 sm:col-span-6 sm:col-start-1 md:col-span-5 md:col-start-1"
         enter="transition-transform duration-300 ease-out"

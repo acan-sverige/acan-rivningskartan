@@ -41,7 +41,7 @@ class Legend implements IControl<MapInstance> {
     const _element = document.createElement("div");
     this._element = _element;
     _element.className = "mt-8 mr-8 flex flex-col gap-2 text-black";
-    let buttons: HTMLButtonElement[] = [];
+    const buttons: HTMLButtonElement[] = [];
     const handleButtonClick = (e: MouseEvent) => {
       if (!(e.currentTarget instanceof HTMLButtonElement)) return;
       const state = e.currentTarget.dataset["state"];

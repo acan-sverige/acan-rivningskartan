@@ -1,4 +1,5 @@
-import { FC, Fragment, PropsWithChildren } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { Fragment } from "react";
 import LinkifyReact from "linkify-react";
 
 export const Linkify: FC<PropsWithChildren> = ({ children }) => (

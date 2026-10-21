@@ -1,4 +1,4 @@
-import { SchemaTypeDefinition } from "sanity";
+import type { SchemaTypeDefinition } from "sanity";
 import { SettingsIcon } from "../components/SettingsIcon";
 
 export const settings: SchemaTypeDefinition = {

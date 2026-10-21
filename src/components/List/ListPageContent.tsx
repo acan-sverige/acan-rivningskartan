@@ -2,21 +2,15 @@
 import { DetailsMap } from "@/components/DetailsMap";
 import { DetailsPanel } from "@/components/DetailsPanel";
 import { Navigation } from "@/components/Navigation";
-import classNames from "clsx";
-import {
-  FC,
-  MouseEvent,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import type { FC, MouseEvent } from "react";
+import { useCallback, useState } from "react";
 import { Transition } from "@headlessui/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { BuildingImage } from "@/components/BuildingImage";
 import { buildingToQueryParams } from "@/lib/buildingToQueryParams";
 import { BuildingHeading } from "@/components/BuildingHeading";
-import { Feature, Point } from "geojson";
+import { SearchParamEffect } from "@/components/SearchParamEffect";
+import type { Feature, Point } from "geojson";
 import { ListFilter } from "./ListFilter";
 import { SORTERS } from "./sorting";
 
@@ -51,8 +45,6 @@ export const ListPageContent: FC<{
 }> = ({ feedbackEmail, buildings, dict }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const selectedId = searchParams.get("view");
   const [filter, setFilter] = useState("");
   const [stateFilter, setStateFilter] = useState<string>();
   const [hasSelectedBuilding, setHasSelectedBuilding] = useState(false);
@@ -60,17 +52,20 @@ export const ListPageContent: FC<{
   const [sortBy, setSortBy] = useState<keyof typeof SORTERS>("_createdAt");
   const [sortDesc, setSortDesc] = useState(true);
 
-  useEffect(() => {
-    if (selectedId) {
-      setSelectedBuilding(
-        buildings.features.find((f) => f.properties._id === selectedId)
-          ?.properties,
-      );
-      setHasSelectedBuilding(true);
-    } else {
-      setHasSelectedBuilding(false);
-    }
-  }, [selectedId]);
+  const handleViewParam = useCallback(
+    (selectedId: string | null) => {
+      if (selectedId) {
+        setSelectedBuilding(
+          buildings.features.find((f) => f.properties._id === selectedId)
+            ?.properties,
+        );
+        setHasSelectedBuilding(true);
+      } else {
+        setHasSelectedBuilding(false);
+      }
+    },
+    [buildings],
+  );
 
   const handleSelectBuilding = useCallback(
     (building: FeatureBuilding, e: MouseEvent<HTMLAnchorElement>) => {
@@ -101,6 +96,7 @@ export const ListPageContent: FC<{
 
   return (
     <>
+      <SearchParamEffect name="view" onChange={handleViewParam} />
       <div className="min-h-screen">
         <div className="min-h-[1px]"></div>
         <header className="sticky top-0 z-10">

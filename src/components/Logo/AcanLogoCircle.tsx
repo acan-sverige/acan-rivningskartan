@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { AcanLogoCircleSwe } from "./AcanLogoCircleSwe";
 import { AcanLogoCircleNo } from "./AcanLogoCircleNo";
 import { AcanLogoCircleFin } from "./AcanLogoCircleFin";

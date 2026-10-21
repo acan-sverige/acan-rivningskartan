@@ -1,7 +1,7 @@
 "use client";
 
-import { SanityDocument } from "next-sanity";
-import { FC } from "react";
+import type { SanityDocument } from "next-sanity";
+import type { FC } from "react";
 import { useLiveQuery } from "@sanity/preview-kit";
 import { ManifestPageContent } from "./ManifestPageContent";
 

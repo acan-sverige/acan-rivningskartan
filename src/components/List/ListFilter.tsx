@@ -1,13 +1,8 @@
-import {
-  ChangeEventHandler,
-  Dispatch,
-  FC,
-  SetStateAction,
-  useCallback,
-} from "react";
+import type { ChangeEventHandler, Dispatch, FC, SetStateAction } from "react";
+import { useCallback } from "react";
 import { FilterButton } from "../FilterButton";
 import { SortButton } from "./SortButton";
-import { SORTERS } from "./sorting";
+import type { SORTERS } from "./sorting";
 
 interface Props {
   stateFilter?: string;
@@ -41,7 +36,7 @@ export const ListFilter: FC<Props> = ({
       const value = e.target.value;
       setFilter(value.trim());
     },
-    [],
+    [setFilter],
   );
 
   return (

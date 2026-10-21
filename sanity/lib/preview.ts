@@ -1,4 +1,4 @@
-import { StructureBuilder } from "sanity/desk";
+import type { StructureBuilder } from "sanity/desk";
 import { Iframe } from "sanity-plugin-iframe-pane";
 
 export const createPreview = (S: StructureBuilder) => [

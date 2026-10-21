@@ -1,4 +1,4 @@
-import { GeopointValue } from "sanity";
+import type { GeopointValue } from "sanity";
 import { categories } from "./categories";
 import { states } from "./states";
 

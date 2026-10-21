@@ -17,10 +17,7 @@ const config: Config = {
         "acan-green": "#a9bb4f",
         "acan-red": "#f00",
         disabled: "#9E9E9E",
-        gray: {
-          list: "#292929",
-          unknown: "#e9e9e9",
-        },
+        gray: { list: "#292929", unknown: "#e9e9e9" },
       },
       fontSize: {
         intro: [
@@ -29,22 +26,11 @@ const config: Config = {
         ],
         menu: ["1.375rem", { fontWeight: "600", lineHeight: "1.05" }],
         "menu-s": ["1.125rem", { fontWeight: "600", lineHeight: "1.05" }],
-        body: [
-          "1rem",
-          {
-            fontWeight: "700",
-            lineHeight: "1.05",
-          },
-        ],
+        body: ["1rem", { fontWeight: "700", lineHeight: "1.05" }],
         list: ["0.875rem", { fontWeight: 700, lineHeight: "1.05" }],
       },
-      margin: {
-        column: "calc(20% - 2.5rem)",
-      },
-      spacing: {
-        "header-s": "7.25rem",
-        header: "8.25rem",
-      },
+      margin: { column: "calc(20% - 2.5rem)" },
+      spacing: { "header-s": "7.25rem", header: "8.25rem" },
       fontFamily: {
         sans: ["Arial", "sans-serif"],
         condensed: [
@@ -56,16 +42,10 @@ const config: Config = {
           "sans-serif",
         ],
       },
-      screens: {
-        xs: "420px",
-        xl: "1600px",
-      },
-      width: {
-        logo: "5.75rem",
-      },
-      aspectRatio: {
-        wide: "2/1",
-      },
+      screens: { xs: "420px", xl: "1600px" },
+      width: { logo: "5.75rem" },
+      aspectRatio: { wide: "2/1" },
+      dropShadow: { close: "0 0 8px rgba(255,255,255,0.5)" },
       typography: {
         DEFAULT: {
           css: {
@@ -87,9 +67,7 @@ const config: Config = {
             "--tw-prose-pre-bg": "inherit",
             "--tw-prose-th-borders": "inherit",
             "--tw-prose-td-borders": "inherit",
-            a: {
-              fontWeight: "inherit",
-            },
+            a: { fontWeight: "inherit" },
           },
         },
       },

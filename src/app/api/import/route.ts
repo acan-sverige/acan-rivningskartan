@@ -1,7 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { client } from "@/lib/sanityClient";
 import * as papa from "papaparse";
-import { CsvRow, csvDataToSanityBuilding } from "@/lib/csvDataToSanityBuilding";
+import type { CsvRow } from "@/lib/csvDataToSanityBuilding";
+import { csvDataToSanityBuilding } from "@/lib/csvDataToSanityBuilding";
 import { stripLines } from "../../../lib/stripLines";
 import { notFound } from "next/navigation";
 import { groq } from "next-sanity";
@@ -68,7 +70,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function DELETE(request: NextRequest) {
+export async function DELETE() {
   if (process.env.NODE_ENV !== "development") {
     notFound();
   }

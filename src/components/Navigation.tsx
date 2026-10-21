@@ -1,5 +1,5 @@
 "use client";
-import { FC, MouseEventHandler, PropsWithChildren, ReactNode } from "react";
+import type { FC, MouseEventHandler, PropsWithChildren } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import classNames from "clsx";
@@ -10,12 +10,16 @@ const stopPropagation: MouseEventHandler<HTMLAnchorElement> = (e) => {
   e.nativeEvent.stopImmediatePropagation();
 };
 
-const NavLink: FC<{
-  href: string;
-  path: string;
-  children: ReactNode;
-  inverted?: boolean;
-}> = ({ href, path, children, inverted }) => (
+// Map and list pages share the dynamic [slug] route, so links to them need
+// `prefetch` to load the page itself and not only the route's App Shell
+const NavLink: FC<
+  PropsWithChildren<{
+    href: string;
+    path: string;
+    inverted?: boolean;
+    prefetch?: boolean;
+  }>
+> = ({ href, path, children, inverted, prefetch }) => (
   <Link
     className={classNames(
       "pointer-events-auto outline-none",
@@ -25,6 +29,7 @@ const NavLink: FC<{
       path === href && "pointer-events-none text-acan-blue",
     )}
     href={href}
+    prefetch={prefetch}
     onClick={stopPropagation}
   >
     {children}
@@ -42,18 +47,19 @@ export const Navigation: FC<{ scaleLogo?: boolean; dict: Dictionary }> = ({
       <div className="col-span-2">
         <Link
           href={`/${dict.nav.map}`}
+          prefetch
           className="pointer-events-auto outline-none hover:text-acan-blue focus-visible:text-acan-blue"
           dangerouslySetInnerHTML={{ __html: dict.nav.title }}
         ></Link>
       </div>
       <div className="col-span-2 flex flex-col">
         <div>
-          <NavLink href={`/${dict.nav.map}`} path={path}>
+          <NavLink href={`/${dict.nav.map}`} path={path} prefetch>
             {dict.nav.map}
           </NavLink>
         </div>
         <div>
-          <NavLink href={`/${dict.nav.list}`} path={path}>
+          <NavLink href={`/${dict.nav.list}`} path={path} prefetch>
             {dict.nav.list}
           </NavLink>
         </div>
@@ -63,7 +69,7 @@ export const Navigation: FC<{ scaleLogo?: boolean; dict: Dictionary }> = ({
           </NavLink>
         </div>
         <div>
-          <NavLink href={`/${dict.nav.map}?add`} path={path} inverted>
+          <NavLink href={`/${dict.nav.map}?add`} path={path} inverted prefetch>
             {dict.nav.addOne}
             <span className="hidden sm:inline"> {dict.nav.addTwo}</span>
           </NavLink>

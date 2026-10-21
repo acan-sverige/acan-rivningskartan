@@ -1,5 +1,4 @@
-import { GeopointValue } from "sanity";
-import { csvDataToSanityBuilding, CsvRow } from "./csvDataToSanityBuilding";
+import { csvDataToSanityBuilding } from "./csvDataToSanityBuilding";
 
 it("should convert data from csv file to sanity building", () => {
   const csvData = {
@@ -32,11 +31,7 @@ it("should convert data from csv file to sanity building", () => {
 
   expect(result).toEqual({
     _type: "building",
-    location: {
-      _type: "geopoint",
-      lat: 59.311583,
-      lng: 18.031,
-    },
+    location: { _type: "geopoint", lat: 59.311583, lng: 18.031 },
     name: "namn",
     category: "kontor",
     state: "riven",

@@ -1,4 +1,4 @@
-import { Feature, Point } from "geojson";
+import type { Feature, Point } from "geojson";
 import { translateState } from "./translateState";
 
 export const toFeature = <

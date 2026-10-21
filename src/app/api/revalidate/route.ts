@@ -1,7 +1,8 @@
 import { parseBody } from "next-sanity/webhook";
 import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 if (!process.env.SANITY_REVALIDATE_SECRET) {
   throw new Error("Missing environment variable: SANITY_REVALIDATE_SECRET");

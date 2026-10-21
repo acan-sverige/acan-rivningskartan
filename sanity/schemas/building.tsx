@@ -1,4 +1,4 @@
-import { SchemaTypeDefinition } from "sanity";
+import type { SchemaTypeDefinition } from "sanity";
 import { MapInput } from "../components/MapInput";
 import { categories } from "@/lib/categories";
 import { states } from "@/lib/states";

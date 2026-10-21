@@ -1,10 +1,10 @@
-import { FC } from "react";
-import {
-  useControl,
+import type { FC } from "react";
+import type {
   MapInstance,
   IControl,
   ControlPosition,
 } from "react-map-gl/maplibre";
+import { useControl } from "react-map-gl/maplibre";
 // import "./LegendControl.css";
 
 const createStateLegendElement = (
@@ -73,7 +73,7 @@ class Legend implements IControl<MapInstance> {
     _element.appendChild(threatenedButton);
     _element.appendChild(savedButton);
   }
-  onAdd(_map: MapInstance) {
+  onAdd(map: MapInstance) {
     return this._element;
   }
   onRemove(map: MapInstance): void {
@@ -81,7 +81,7 @@ class Legend implements IControl<MapInstance> {
   }
 }
 export const LegendControl: FC<LegendProps> = (props) => {
-  useControl((_context) => new Legend(props), { position: props.position });
+  useControl((context) => new Legend(props), { position: props.position });
 
   return null;
 };

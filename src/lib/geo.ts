@@ -1,4 +1,4 @@
-import {
+import type {
   Feature,
   FeatureCollection,
   GeoJsonProperties,
@@ -8,7 +8,7 @@ import {
 
 export const latLngToFeature = <T extends Record<string, unknown>>(
   latLng: LatLng,
-  props: T
+  props: T,
 ): Feature<Point> => ({
   type: "Feature",
   geometry: { type: "Point", coordinates: [latLng.lng, latLng.lat] },
@@ -17,7 +17,7 @@ export const latLngToFeature = <T extends Record<string, unknown>>(
 
 export const appendFeature = <G extends Geometry, P = GeoJsonProperties>(
   collection: FeatureCollection<G, P>,
-  feature: Feature<G, P>
+  feature: Feature<G, P>,
 ): FeatureCollection<G, P> => ({
   type: "FeatureCollection",
   features: [...collection.features, feature],

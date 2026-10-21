@@ -1,4 +1,5 @@
-import { FC, useEffect, useRef } from "react";
+import type { FC } from "react";
+import { useEffect, useRef } from "react";
 import { AcanLogoCircle } from "./AcanLogoCircle";
 
 function easeInOutCubic(x: number): number {

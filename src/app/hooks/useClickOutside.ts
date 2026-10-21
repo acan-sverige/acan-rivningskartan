@@ -1,4 +1,5 @@
-import { RefObject, useEffect } from "react";
+import type { RefObject } from "react";
+import { useEffect } from "react";
 
 export const useClickOutside = <T extends Node>(
   element: RefObject<T | null>,
@@ -19,5 +20,5 @@ export const useClickOutside = <T extends Node>(
       10,
     );
     return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+  }, [element, onClick]);
 };

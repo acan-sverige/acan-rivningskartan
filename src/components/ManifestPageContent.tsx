@@ -1,6 +1,6 @@
 import { PortableText } from "@portabletext/react";
-import { SanityDocument } from "next-sanity";
-import { FC } from "react";
+import type { SanityDocument } from "next-sanity";
+import type { FC } from "react";
 import { Image } from "@/components/portableText/Image";
 import { SallyLogo } from "./SallyLogo";
 import { AcanLogoText } from "./Logo/AcanLogoText";
@@ -30,12 +30,14 @@ export const ManifestPageContent: FC<{
               <div>
                 <Link
                   href={`/${dict.slugs.map}`}
+                  prefetch
                   className="block whitespace-nowrap"
                 >
                   {dict.nav.map} &rarr;
                 </Link>
                 <Link
                   href={`/${dict.slugs.list}`}
+                  prefetch
                   className="block whitespace-nowrap"
                 >
                   {dict.nav.list} &rarr;

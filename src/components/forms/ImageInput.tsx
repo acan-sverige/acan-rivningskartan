@@ -1,12 +1,5 @@
-import {
-  ChangeEventHandler,
-  DragEventHandler,
-  FC,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import type { ChangeEventHandler, DragEventHandler, FC } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import classNames from "clsx";
 
 interface ImageType {
@@ -41,17 +34,20 @@ export const ImageInput: FC<
       fr.readAsDataURL(file);
     }
   }, []);
-  const handleDrop: DragEventHandler<HTMLLabelElement> = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    if (inputRef.current) {
-      const files = e.dataTransfer.files;
-      inputRef.current.files = files;
-      processImages(files);
-    }
-    setDragging(false);
-  }, []);
+  const handleDrop: DragEventHandler<HTMLLabelElement> = useCallback(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      e.nativeEvent.stopImmediatePropagation();
+      if (inputRef.current) {
+        const files = e.dataTransfer.files;
+        inputRef.current.files = files;
+        processImages(files);
+      }
+      setDragging(false);
+    },
+    [processImages],
+  );
   const handleDragEnter: DragEventHandler<HTMLLabelElement> = useCallback(
     (e) => {
       e.preventDefault();
@@ -70,7 +66,7 @@ export const ImageInput: FC<
     (e) => {
       if (e.target.files) processImages(e.target.files);
     },
-    [],
+    [processImages],
   );
   const handleRemoveImage = useCallback((img: ImageType) => {
     setImages((old) => old.filter((i) => i !== img));
@@ -86,7 +82,7 @@ export const ImageInput: FC<
       setIsInvalidSize(invalidSize);
       inputRef.current?.setCustomValidity(invalidSize ? maxSizeText : "");
     }
-  }, [images]);
+  }, [images, maxSizeText]);
 
   return (
     <>
@@ -112,9 +108,11 @@ export const ImageInput: FC<
         {images.length > 0 ? (
           images.map((img, i) => (
             <figure key={i} className="relative flex-grow basis-1/4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.url}
                 className="aspect-square w-full object-contain"
+                alt=""
               />
               <div className="flex justify-between gap-2">
                 <figcaption className="text-sm">{img.name}</figcaption>

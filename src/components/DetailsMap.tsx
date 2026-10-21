@@ -1,12 +1,10 @@
 import { toFeature } from "@/lib/toFeature";
-import { FC, useCallback, useState } from "react";
-import ReactMapGl, {
-  Source,
-  Layer,
-  ViewStateChangeEvent,
-} from "react-map-gl/maplibre";
+import type { FC } from "react";
+import { useCallback, useState } from "react";
+import type { ViewStateChangeEvent } from "react-map-gl/maplibre";
+import ReactMapGl, { Source, Layer } from "react-map-gl/maplibre";
 import { UNCLUSTERED_LAYER_STYLE } from "./Map/layers";
-import { FeatureCollection } from "geojson";
+import type { FeatureCollection } from "geojson";
 import { mapStyle } from "./Map/style";
 
 // Include style sheets

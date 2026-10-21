@@ -1,11 +1,5 @@
-import {
-  FC,
-  FocusEvent,
-  FocusEventHandler,
-  InputHTMLAttributes,
-  useCallback,
-  useState,
-} from "react";
+import type { FC, FocusEvent, InputHTMLAttributes } from "react";
+import { useCallback, useState } from "react";
 import classNames from "clsx";
 
 export const Input: FC<
@@ -18,18 +12,19 @@ export const Input: FC<
     onChange?: <T>(event: { target: { value: T } }) => void;
   }
 > = ({ label, ...props }) => {
+  const { min, value, onChange } = props;
   const [interacted, setInteracted] = useState(false);
 
   const handleInteracted = useCallback(() => setInteracted(true), []);
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLInputElement>) => {
       // if there's a min value and the input is empty, set it to the min value
-      if (props.min && !props.value && !e.target.value) {
-        props.onChange?.({ target: { value: props.min } });
-        e.target.value = props.min.toString();
+      if (min && !value && !e.target.value) {
+        onChange?.({ target: { value: min } });
+        e.target.value = min.toString();
       }
     },
-    [props.min, props.value, props.onChange],
+    [min, value, onChange],
   );
 
   return (
@@ -39,7 +34,7 @@ export const Input: FC<
         id={props.name}
         className="peer w-full appearance-none border-b border-current bg-transparent outline-none focus-within:border-acan-blue"
         placeholder=" "
-        onFocus={props.min ? handleFocus : undefined}
+        onFocus={min ? handleFocus : undefined}
         onBlur={handleInteracted}
       />
       <label

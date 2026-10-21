@@ -20,7 +20,7 @@ export const CloseButton: FC<CloseButtonProps> = ({ onClick, close }) => {
     <button
       aria-label={close}
       onClick={onClick}
-      className="flex h-12 w-12 items-center justify-center text-5xl font-bold leading-none text-white hover:text-acan-blue"
+      className="flex h-12 w-12 items-center justify-center text-5xl font-bold leading-none hover:text-acan-blue drop-shadow-close"
     >
       &times;
     </button>

@@ -30,12 +30,14 @@ export const ManifestPageContent: FC<{
               <div>
                 <Link
                   href={`/${dict.slugs.map}`}
+                  prefetch
                   className="block whitespace-nowrap"
                 >
                   {dict.nav.map} &rarr;
                 </Link>
                 <Link
                   href={`/${dict.slugs.list}`}
+                  prefetch
                   className="block whitespace-nowrap"
                 >
                   {dict.nav.list} &rarr;

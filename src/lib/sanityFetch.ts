@@ -1,5 +1,6 @@
 import "server-only";
 import type { QueryParams } from "@sanity/client";
+import { cacheLife, cacheTag } from "next/cache";
 import { draftMode } from "next/headers";
 import { client } from "../../sanity/lib/client";
 
@@ -17,25 +18,35 @@ export async function sanityFetch<QueryResponse>({
   params?: QueryParams;
   tags?: string[];
 }): Promise<QueryResponse> {
+  // Draft content is fetched uncached, outside of any "use cache" scope
   const isDraftMode = (await draftMode()).isEnabled;
-  if (isDraftMode && !readToken) {
-    throw new Error(
-      "The `SANITY_READ_TOKEN` environment variable is required.",
-    );
-  }
-  const isDevelopment = process.env.NODE_ENV === "development";
-
-  return client
-    .withConfig({ useCdn: !isDraftMode })
-    .fetch<QueryResponse>(query, params, {
-      cache: isDevelopment || isDraftMode ? undefined : "force-cache",
-      ...(isDraftMode && {
+  if (isDraftMode) {
+    if (!readToken) {
+      throw new Error(
+        "The `SANITY_READ_TOKEN` environment variable is required.",
+      );
+    }
+    return client
+      .withConfig({ useCdn: false })
+      .fetch<QueryResponse>(query, params, {
         token: readToken,
         perspective: "drafts",
-      }),
-      next: {
-        ...(isDraftMode && { revalidate: 30 }),
-        tags,
-      },
-    });
+      });
+  }
+
+  return fetchPublished<QueryResponse>(query, params, tags);
+}
+
+async function fetchPublished<QueryResponse>(
+  query: string,
+  params: QueryParams,
+  tags: string[],
+): Promise<QueryResponse> {
+  "use cache";
+  // Content updates are pushed by the Sanity webhook (api/revalidate), which
+  // revalidates these tags
+  cacheLife("max");
+  cacheTag(...tags);
+
+  return client.withConfig({ useCdn: true }).fetch<QueryResponse>(query, params);
 }

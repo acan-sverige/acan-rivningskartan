@@ -1,7 +1,6 @@
 import { MapPageContent } from "@/components/MapPageContent";
 import { sanityFetch } from "@/lib/sanityFetch";
 import { buildingsQuery, settingsQuery } from "../../../sanity/lib/queries";
-import { Suspense } from "react";
 import { toFeature } from "@/lib/toFeature";
 import { getDictionary } from "@/lib/dictionaries";
 
@@ -22,13 +21,11 @@ export const MapPage = async () => {
   const features = buildings.map((b) => toFeature(b, dict));
   return (
     <div className="grid h-screen grid-cols-12 grid-rows-[auto_1fr]">
-      <Suspense>
-        <MapPageContent
-          {...settings}
-          buildings={{ type: "FeatureCollection", features }}
-          dict={dict}
-        />
-      </Suspense>
+      <MapPageContent
+        {...settings}
+        buildings={{ type: "FeatureCollection", features }}
+        dict={dict}
+      />
     </div>
   );
 };

@@ -44,6 +44,11 @@ export const Map: FC<MapProps> = ({
 }) => {
   const mapRef = useRef<MapRef>(null);
   const [cursor, setCursor] = useState("grab");
+  // Next.js keeps visited pages mounted but hidden, and react-map-gl creates a
+  // new map when the page is shown again. Markers and controls stay attached to
+  // the old map, so they are keyed on this to be re-added to each new map.
+  const [mapLoads, setMapLoads] = useState(0);
+  const handleLoad = useCallback(() => setMapLoads((n) => n + 1), []);
 
   const handleClickMap: (e: MapLayerMouseEvent) => void = useCallback(
     (e) => {
@@ -98,6 +103,7 @@ export const Map: FC<MapProps> = ({
         }
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onLoad={handleLoad}
       >
         <Source
           id="annotations"
@@ -113,6 +119,7 @@ export const Map: FC<MapProps> = ({
         </Source>
         {isAdding && addingLocation && (
           <Marker
+            key={`marker-${mapLoads}`}
             latitude={addingLocation.lat}
             longitude={addingLocation.lng}
             anchor="bottom"
@@ -122,6 +129,7 @@ export const Map: FC<MapProps> = ({
           </Marker>
         )}
         <NavigationControl
+          key={`controls-${mapLoads}`}
           showZoom
           visualizePitch={false}
           showCompass={false}

@@ -5,12 +5,13 @@ import { Map } from "@/components/Map";
 import { Navigation } from "@/components/Navigation";
 import { NewFeatureForm } from "@/components/NewFeatureForm";
 import { Feature, Point } from "geojson";
-import { MouseEventHandler, useCallback, useEffect, useState } from "react";
+import { MouseEventHandler, useCallback, useState } from "react";
 import { FilterButton } from "@/components/FilterButton";
 import { Transition } from "@headlessui/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { MessagePanel } from "@/components/MessagePanel";
 import { Button } from "@/components/Button";
+import { SearchParamEffect } from "@/components/SearchParamEffect";
 import { buildingToQueryParams } from "@/lib/buildingToQueryParams";
 
 export const MapPageContent: FC<
@@ -24,35 +25,37 @@ export const MapPageContent: FC<
 > = ({ feedbackEmail, confirmationMessage, errorMessage, buildings, dict }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const selectedId = searchParams.get("view");
-  const shouldAdd = searchParams.has("add");
   const [hasSelectedFeature, setHasSelectedFeature] = useState(false);
   const [selectedFeature, setSelectedFeature] =
     useState<Feature<Point, FeatureBuilding>>();
-  const [isAdding, setIsAdding] = useState(shouldAdd);
+  const [isAdding, setIsAdding] = useState(false);
   const [showNewBuildingForm, setShowNewBuildingForm] = useState(false);
   const [addingLocation, setAddingLocation] = useState<LatLng>();
   const [filter, setFilter] = useState<string>();
   const [addedBuilding, setAddedBuilding] = useState<boolean | undefined>();
   const [savingBuilding, setSavingBuilding] = useState(false);
 
-  // this is for handling menu click when already on map page
-  if (shouldAdd && !isAdding) {
-    setIsAdding(true);
-    setAddingLocation(undefined);
-  }
-
-  useEffect(() => {
-    if (selectedId) {
-      setSelectedFeature(
-        buildings.features.find((f) => f.properties._id === selectedId),
-      );
-      setHasSelectedFeature(true);
-    } else {
-      setHasSelectedFeature(false);
+  // this is also for handling menu click when already on map page
+  const handleAddParam = useCallback((add: string | null) => {
+    if (add !== null) {
+      setIsAdding(true);
+      setAddingLocation(undefined);
     }
-  }, [selectedId]);
+  }, []);
+
+  const handleViewParam = useCallback(
+    (selectedId: string | null) => {
+      if (selectedId) {
+        setSelectedFeature(
+          buildings.features.find((f) => f.properties._id === selectedId),
+        );
+        setHasSelectedFeature(true);
+      } else {
+        setHasSelectedFeature(false);
+      }
+    },
+    [buildings],
+  );
 
   const handleAddMarker = useCallback((latLng: LatLng) => {
     // show popup with form
@@ -124,6 +127,8 @@ export const MapPageContent: FC<
 
   return (
     <>
+      <SearchParamEffect name="add" onChange={handleAddParam} />
+      <SearchParamEffect name="view" onChange={handleViewParam} />
       <header className="col-span-12 col-start-1 row-start-1">
         <Navigation dict={dict} />
       </header>

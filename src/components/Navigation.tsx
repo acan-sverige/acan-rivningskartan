@@ -1,5 +1,5 @@
 "use client";
-import { FC, MouseEventHandler, PropsWithChildren, ReactNode } from "react";
+import type { FC, MouseEventHandler, PropsWithChildren } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import classNames from "clsx";
@@ -12,13 +12,14 @@ const stopPropagation: MouseEventHandler<HTMLAnchorElement> = (e) => {
 
 // Map and list pages share the dynamic [slug] route, so links to them need
 // `prefetch` to load the page itself and not only the route's App Shell
-const NavLink: FC<{
-  href: string;
-  path: string;
-  children: ReactNode;
-  inverted?: boolean;
-  prefetch?: boolean;
-}> = ({ href, path, children, inverted, prefetch }) => (
+const NavLink: FC<
+  PropsWithChildren<{
+    href: string;
+    path: string;
+    inverted?: boolean;
+    prefetch?: boolean;
+  }>
+> = ({ href, path, children, inverted, prefetch }) => (
   <Link
     className={classNames(
       "pointer-events-auto outline-none",

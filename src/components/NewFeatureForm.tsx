@@ -1,11 +1,5 @@
-import {
-  ChangeEventHandler,
-  FormEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import type { ChangeEventHandler, SubmitEventHandler } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CloseButton } from "./CloseButton";
 import { categories } from "@/lib/categories";
 import { states } from "@/lib/states";
@@ -16,12 +10,11 @@ import { formatAddress } from "../lib/formatAddress";
 import { ImageInput } from "./forms/ImageInput";
 import { Button } from "./Button";
 import { useClickOutside } from "@/app/hooks/useClickOutside";
-import classNames from "clsx";
 
 interface NewFeatureFormProps {
   latLng: LatLng;
   isSaving?: boolean;
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  onSubmit: SubmitEventHandler<HTMLFormElement>;
   onCancel: () => void;
   dict: Dictionary;
 }
@@ -51,7 +44,7 @@ export const NewFeatureForm = ({
     return () => {
       document.body.classList.remove("waiting");
     };
-  }, []);
+  }, [latLng.lat, latLng.lng]);
 
   const handleChangeState: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => setIsDemolished(e.currentTarget.value === "riven"),

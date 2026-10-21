@@ -1,5 +1,5 @@
 import classNames from "clsx";
-import { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
+import type { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
 
 export const Button: FC<
   PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>>

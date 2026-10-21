@@ -1,6 +1,5 @@
 import { Navigation } from "@/components/Navigation";
 import { getDictionary } from "@/lib/dictionaries";
-import Link from "next/link";
 
 export default async function NotFound() {
   const dict = await getDictionary();

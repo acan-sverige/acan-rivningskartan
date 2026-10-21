@@ -1,4 +1,5 @@
-import { FC, ReactNode, useCallback, useRef, useState } from "react";
+import type { FC } from "react";
+import { useCallback, useRef, useState } from "react";
 import { CloseButton } from "./CloseButton";
 import { Carousel } from "./Carousel";
 import { BuildingHeading } from "./BuildingHeading";
@@ -9,16 +10,6 @@ import { Image } from "./Image";
 import { Linkify } from "./Linkify";
 import { formatAddress } from "@/lib/formatAddress";
 import Link from "next/link";
-
-const Detail: FC<{ label: string; value: string | number | ReactNode }> = ({
-  label,
-  value,
-}) => (
-  <>
-    <div>{label}</div>
-    <div className="text-right font-bold">{value}</div>
-  </>
-);
 
 interface DetailsProps {
   feedbackEmail?: string;

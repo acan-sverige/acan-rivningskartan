@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const AcanLogoTextUK: FC = () => (
   <Link href="https://www.architectscan.org/" rel="noopener noreferrer">

@@ -10,8 +10,8 @@ export const demolitionYearSorter: BuildingSorter = (desc) => (a, b) =>
     ? (a.properties.demolitionYear - b.properties.demolitionYear) *
       (desc ? -1 : 1)
     : a.properties.demolitionYear
-    ? -1
-    : 1;
+      ? -1
+      : 1;
 
 // const addressSorter: BuildingSorter = (desc) => (a, b) =>
 //   (a.properties.address &&

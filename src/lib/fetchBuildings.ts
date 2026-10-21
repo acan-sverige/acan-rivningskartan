@@ -1,4 +1,4 @@
-import { Feature, Point } from "geojson";
+import type { Feature, Point } from "geojson";
 
 export const fetchBuildings = () =>
   fetch("/api/buildings").then(

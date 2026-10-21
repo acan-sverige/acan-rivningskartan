@@ -1,5 +1,6 @@
 import classNames from "clsx";
-import { FC, TextareaHTMLAttributes, useCallback, useState } from "react";
+import type { FC, TextareaHTMLAttributes } from "react";
+import { useCallback, useState } from "react";
 
 export const TextArea: FC<
   Exclude<TextareaHTMLAttributes<HTMLTextAreaElement>, "id" | "name"> & {

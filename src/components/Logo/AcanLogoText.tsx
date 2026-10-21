@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { AcanLogoTextFin } from "./AcanLogoTextFin";
 import { AcanLogoTextSwe } from "./AcanLogoTextSwe";
 import { AcanLogoTextNo } from "./AcanLogoTextNo";

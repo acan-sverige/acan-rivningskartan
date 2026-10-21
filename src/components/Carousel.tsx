@@ -1,12 +1,5 @@
-import classNames from "clsx";
-import {
-  FC,
-  MouseEventHandler,
-  PropsWithChildren,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import type { FC, MouseEventHandler, PropsWithChildren } from "react";
+import { useCallback, useRef, useState } from "react";
 
 export const Carousel: FC<
   PropsWithChildren<Pick<Dictionary, "ariaLabels">>
@@ -18,10 +11,7 @@ export const Carousel: FC<
     (n: number) => {
       if (!ref.current) return;
       const scrollAmount = (n * ref.current.scrollWidth) / numSlides;
-      ref.current.scrollBy({
-        left: scrollAmount,
-        behavior: "smooth",
-      });
+      ref.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     },
     [numSlides],
   );
@@ -80,34 +70,5 @@ export const Carousel: FC<
         </div>
       </div>
     </div>
-  );
-};
-
-const Dots: FC<
-  Pick<Dictionary, "ariaLabels"> & {
-    count: number;
-    currentSlide: number;
-    onClick: (n: number) => void;
-  }
-> = ({ count, currentSlide, onClick, ariaLabels }) => {
-  const dotsArray = new Array(count).fill(0).map((_, n) => n);
-  return (
-    <nav className="absolute bottom-2 left-0 right-0 flex items-center justify-center">
-      {dotsArray.map((n) => (
-        <button
-          key={n}
-          onClick={() => onClick(n)}
-          aria-label={`${ariaLabels.image} ${n + 1}`}
-          className="p-0.5"
-        >
-          <span
-            className={classNames(
-              "block h-2 w-2 rounded-full border border-black transition-colors",
-              currentSlide === n && "bg-black",
-            )}
-          ></span>
-        </button>
-      ))}
-    </nav>
   );
 };

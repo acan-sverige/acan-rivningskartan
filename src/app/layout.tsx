@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { sanityFetch } from "@/lib/sanityFetch";
 import { settingsQuery } from "../../sanity/lib/queries";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
-
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch<SettingsType>({

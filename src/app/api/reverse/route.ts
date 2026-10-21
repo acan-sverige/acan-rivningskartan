@@ -1,5 +1,6 @@
 import { reverse } from "@/lib/reverse";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const lat = req.nextUrl.searchParams.get("lat");

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const AcanLogoCircleUK: FC = () => (
   <Link
@@ -7,7 +7,7 @@ export const AcanLogoCircleUK: FC = () => (
     rel="noopener noreferrer"
     target="_blank"
     title="Architects Climate Action Network"
-    className="fill-acan-red pointer-events-auto block hover:fill-black"
+    className="pointer-events-auto block fill-acan-red hover:fill-black"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

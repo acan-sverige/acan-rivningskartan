@@ -1,13 +1,16 @@
-import { FC, useCallback, useRef, useState } from "react";
-import ReactMapGl, {
+import type { FC } from "react";
+import { useCallback, useRef, useState } from "react";
+import type {
   MapEvent,
   MapLayerMouseEvent,
+  MapRef,
+  LngLatBoundsLike,
+} from "react-map-gl/maplibre";
+import ReactMapGl, {
   Source,
   Layer,
-  MapRef,
   Marker,
   NavigationControl,
-  LngLatBoundsLike,
 } from "react-map-gl/maplibre";
 import type { Feature, Point } from "geojson";
 import classNames from "clsx";
@@ -134,6 +137,7 @@ export const Map: FC<MapProps> = ({
             anchor="bottom"
             offset={[0, 6]}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={markerImage.src} alt="" />
           </Marker>
         )}

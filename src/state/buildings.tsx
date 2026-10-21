@@ -1,14 +1,7 @@
 "use client";
 import { fetchBuildings } from "@/lib/fetchBuildings";
-import {
-  Dispatch,
-  FC,
-  PropsWithChildren,
-  Reducer,
-  createContext,
-  useEffect,
-  useReducer,
-} from "react";
+import type { Dispatch, FC, PropsWithChildren, Reducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 const INITIAL_STATE: BuildingCollection & { loading: boolean } = {
   type: "FeatureCollection",

@@ -1,12 +1,7 @@
-import {
-  ChangeEventHandler,
-  FC,
-  InputHTMLAttributes,
-  useCallback,
-  useState,
-} from "react";
+import type { ChangeEventHandler, FC, InputHTMLAttributes } from "react";
+import { useCallback, useState } from "react";
 import classNames from "clsx";
-import { TitledListValue } from "sanity";
+import type { TitledListValue } from "sanity";
 import { capitalize } from "@/lib/capitalize";
 
 export const Select: FC<
@@ -19,7 +14,7 @@ export const Select: FC<
     options: TitledListValue<string>[];
     formList: Categories | States;
   }
-> = ({ label, onChange, autoFocus, options, formList, ...props }) => {
+> = ({ label, onChange, options, formList, ...props }) => {
   const [hasValue, setHasValue] = useState(false);
   const [interacted, setInteracted] = useState(false);
   const handleChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
@@ -27,7 +22,7 @@ export const Select: FC<
       setHasValue(e.target.value.length > 0);
       onChange?.(e);
     },
-    [],
+    [onChange],
   );
   const handleInteracted = useCallback(() => setInteracted(true), []);
 
@@ -42,7 +37,7 @@ export const Select: FC<
       >
         <option></option>
 
-        {options.map((opt, i) => (
+        {options.map((opt) => (
           <option
             className="capitalize"
             key={opt.title}

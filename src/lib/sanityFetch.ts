@@ -48,5 +48,7 @@ async function fetchPublished<QueryResponse>(
   cacheLife("max");
   cacheTag(...tags);
 
-  return client.withConfig({ useCdn: true }).fetch<QueryResponse>(query, params);
+  return client
+    .withConfig({ useCdn: true })
+    .fetch<QueryResponse>(query, params);
 }

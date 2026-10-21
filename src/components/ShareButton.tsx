@@ -1,5 +1,6 @@
 import classNames from "clsx";
-import { FC, PropsWithChildren, useCallback } from "react";
+import type { FC, PropsWithChildren } from "react";
+import { useCallback } from "react";
 
 interface ShareButtonProps {
   state: string | boolean | undefined;
@@ -28,7 +29,8 @@ export const ShareButton: FC<PropsWithChildren<ShareButtonProps>> = ({
         .then(() => onSuccess("clipboard"))
         .catch(onError);
     }
-  }, []);
+  }, [onSuccess, onError]);
+
   return (
     <button
       onClick={handleShare}

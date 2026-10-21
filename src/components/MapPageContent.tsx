@@ -1,11 +1,12 @@
 "use client";
-import { FC, FormEventHandler } from "react";
+import type { FC, FormEventHandler } from "react";
 import { DetailsPanel } from "@/components/DetailsPanel";
 import { Map } from "@/components/Map";
 import { Navigation } from "@/components/Navigation";
 import { NewFeatureForm } from "@/components/NewFeatureForm";
-import { Feature, Point } from "geojson";
-import { MouseEventHandler, useCallback, useState } from "react";
+import type { Feature, Point } from "geojson";
+import type { MouseEventHandler } from "react";
+import { useCallback, useState } from "react";
 import { FilterButton } from "@/components/FilterButton";
 import { Transition } from "@headlessui/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -57,12 +58,15 @@ export const MapPageContent: FC<
     [buildings],
   );
 
-  const handleAddMarker = useCallback((latLng: LatLng) => {
-    // show popup with form
-    setAddingLocation(latLng);
-    setShowNewBuildingForm(true);
-    router.replace(pathname);
-  }, []);
+  const handleAddMarker = useCallback(
+    (latLng: LatLng) => {
+      // show popup with form
+      setAddingLocation(latLng);
+      setShowNewBuildingForm(true);
+      router.replace(pathname);
+    },
+    [pathname, router],
+  );
   const handleCancelFeature = useCallback(() => {
     setIsAdding(false);
     setShowNewBuildingForm(false);
@@ -104,12 +108,12 @@ export const MapPageContent: FC<
       setHasSelectedFeature(true);
       router.push(`${pathname}?${buildingToQueryParams(feature.properties)}`);
     },
-    [buildings],
+    [buildings, router, pathname],
   );
   const clearSelectedFeature = useCallback(() => {
     setHasSelectedFeature(false);
     router.push(pathname);
-  }, []);
+  }, [router, pathname]);
   const handleClickAddBuilding: MouseEventHandler<HTMLButtonElement> =
     useCallback((e) => {
       e.stopPropagation();

@@ -1,6 +1,6 @@
 import Img from "next/image";
-import { ComponentProps, FC } from "react";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { ComponentProps, FC } from "react";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { urlForImage } from "../../sanity/lib/image";
 
 type ImageProps = {

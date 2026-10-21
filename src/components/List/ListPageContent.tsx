@@ -2,21 +2,15 @@
 import { DetailsMap } from "@/components/DetailsMap";
 import { DetailsPanel } from "@/components/DetailsPanel";
 import { Navigation } from "@/components/Navigation";
-import classNames from "clsx";
-import {
-  FC,
-  MouseEvent,
-  PropsWithChildren,
-  useCallback,
-  useState,
-} from "react";
+import type { FC, MouseEvent } from "react";
+import { useCallback, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { usePathname, useRouter } from "next/navigation";
 import { BuildingImage } from "@/components/BuildingImage";
 import { buildingToQueryParams } from "@/lib/buildingToQueryParams";
 import { BuildingHeading } from "@/components/BuildingHeading";
 import { SearchParamEffect } from "@/components/SearchParamEffect";
-import { Feature, Point } from "geojson";
+import type { Feature, Point } from "geojson";
 import { ListFilter } from "./ListFilter";
 import { SORTERS } from "./sorting";
 

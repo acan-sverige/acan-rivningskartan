@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { FC, Suspense, useEffect } from "react";
+import type { FC } from "react";
+import { Suspense, useEffect } from "react";
 
 type Props = {
   name: string;

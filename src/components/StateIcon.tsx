@@ -1,6 +1,5 @@
-import { capitalize } from "@/lib/capitalize";
 import classNames from "clsx";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const StateIcon: FC<{ state: string; dictStates: States }> = ({
   state,
@@ -12,10 +11,10 @@ export const StateIcon: FC<{ state: string; dictStates: States }> = ({
       state === dictStates.demolished
         ? "bg-demolished"
         : state === dictStates.threatened
-        ? "bg-threatened"
-        : state === dictStates.saved
-        ? "bg-saved"
-        : "bg-gray-unknown",
+          ? "bg-threatened"
+          : state === dictStates.saved
+            ? "bg-saved"
+            : "bg-gray-unknown",
     )}
     aria-label={state in dictStates ? state : undefined}
     title={state in dictStates ? state : undefined}

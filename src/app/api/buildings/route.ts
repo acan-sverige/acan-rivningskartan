@@ -1,5 +1,6 @@
 import { client } from "@/lib/sanityClient";
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { toFeature } from "@/lib/toFeature";
 import { nanoid } from "nanoid";
 
@@ -49,8 +50,7 @@ export async function POST(request: NextRequest) {
       blockName: formData.get("blockName") as string | undefined,
       // Fastighetsbeteckning
       propertyDesignation: formData.get("propertyDesignation") as
-        | string
-        | undefined,
+        string | undefined,
       // Storlek m2
       size: formData.has("size") ? Number(formData.get("size")) : undefined,
       // (Inbunden C02)

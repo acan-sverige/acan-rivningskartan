@@ -1,4 +1,4 @@
-import { SanityDocument } from "next-sanity";
+import type { SanityDocument } from "next-sanity";
 import { draftMode } from "next/headers";
 import PreviewProvider from "@/components/PreviewProvider";
 import { manifestQuery } from "../../sanity/lib/queries";
